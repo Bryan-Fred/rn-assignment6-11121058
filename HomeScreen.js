@@ -80,7 +80,33 @@ const HomeScreen = ({ navigation }) => {
     },
   ]);
 
+  const addToCart = async (product) => {
+    try {
+      const cart = await AsyncStorage.getItem("cart");
+      const cartItems = cart ? JSON.parse(cart) : [];
+      const itemExists = cartItems.some((item) => item.id === product.id);
+      if (!itemExists) {
+        cartItems.push(product);
+        await AsyncStorage.setItem("cart", JSON.stringify(cartItems));
+        alert("Product added to cart!");
+      } else {
+        alert("Product is already in the cart!");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
+  useEffect(() => {
+    const checkCart = async () => {
+      const cart = await AsyncStorage.getItem("cart");
+      if (cart) {
+        console.log("Cart:", JSON.parse(cart));
+      }
+    };
+
+    checkCart();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -144,16 +170,19 @@ const styles = StyleSheet.create({
     paddingRight: 10,
     backgroundColor: "white",
   },
+  
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     marginBottom: 10,
   },
+  
   companyIcon:{
     position: 'absolute',
     left: '40%'
   },
+
   rightIcons: {
     flexDirection: 'row',
   },
@@ -195,6 +224,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     flex: 1,
   },
+
   circleIcon: {
     backgroundColor: '#dfdcdca2',
     borderRadius: 20,
@@ -210,23 +240,27 @@ const styles = StyleSheet.create({
   iconButton: {
     padding: 10,
   },
+
   product: {
     flex: 1,
     margin: 10,
     backgroundColor: "#f9f9f9",
     position: "relative",
   },
+
   image: {
     width: "100%",
     height: 150,
     objectFit: "contain",
   },
+
   infoContainer: {
     marginTop: 10,
     textAlign: "left",
     paddingLeft: 2,
     backgroundColor: 'white',
   },
+
   addButton: {
     position: "absolute",
     bottom: 80,
