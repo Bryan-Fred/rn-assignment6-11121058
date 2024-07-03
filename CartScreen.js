@@ -48,14 +48,12 @@ const CartScreen = ({ navigation }) => {
             <Icon name="search" size={22} color="#868686" />
           </TouchableOpacity>
       </View>
-
       <View style={styles.checkoutHeader}>
         <View style={styles.leftLine}></View>
         <View style={styles.circle}></View>
         < Text style= {styles.checkoutTitle}>CHECKOUT</Text>
         <View style={styles.rightLine}></View>
       </View>
-
       <FlatList
         data={cart}
         renderItem={({ item }) => (
