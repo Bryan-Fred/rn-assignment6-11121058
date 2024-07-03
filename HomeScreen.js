@@ -124,7 +124,6 @@ const HomeScreen = ({ navigation }) => {
           </TouchableOpacity>
         </View>
       </View>
-
       <View style={styles.ourStory}>
         <Text style={styles.ourStoryText}>OUR STORY</Text>
         <View style={styles.categoryFilterIcons}>
@@ -136,7 +135,6 @@ const HomeScreen = ({ navigation }) => {
           </TouchableOpacity>
         </View>
       </View>
-
       <FlatList
         data={products}
         renderItem={({ item }) => (
@@ -170,7 +168,7 @@ const styles = StyleSheet.create({
     paddingRight: 10,
     backgroundColor: "white",
   },
-  
+
   header: {
     flexDirection: 'row',
     alignItems: 'center',
